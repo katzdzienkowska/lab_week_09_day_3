@@ -67,7 +67,7 @@ const createRouter = function (collection) {
         const id = req.params.id;
         const updatedBooking = req.body;
         collection
-        .updateOne({ _id: ObjectID(id) }, { $set: updatedbooking })
+        .updateOne({ _id: ObjectID(id) }, { $set: updatedBooking })
         .then((result) => res.json(result))
         .catch((err) => {
             console.error(err);
