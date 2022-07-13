@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import BookingList from '../components/BookingList';
 import BookingForm from '../components/BookingForm';
 
-import { getBookings, postBooking, deleteBooking} from '../BookingService'
+import { getBookings, postBooking, deleteBooking, updateBooking} from '../BookingService'
 
 const BookingContainer = () => {
 
@@ -41,13 +41,21 @@ const BookingContainer = () => {
 
 
     // edit Booking
-
+    const changeBooking = (bookingToChange) => {
+        updateBooking(bookingToChange)
+        .then(() => {
+          const bookingIndex = bookings.findIndex(booking => booking._id === bookingToChange._id);
+          const copyBookings = [...bookings];
+          copyBookings[bookingIndex].checkedIn = bookingToChange.checkedIn;
+          setBookings(copyBookings);
+        });
+      };
 
 
     return(
         <>
         <BookingForm addBooking={addBooking}/>
-        <BookingList bookings={bookings} removeBooking={removeBooking}/>
+        <BookingList bookings={bookings} removeBooking={removeBooking} changeBooking={changeBooking}/>
         </>
     )    
 

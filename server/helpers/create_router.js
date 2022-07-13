@@ -34,7 +34,7 @@ const createRouter = function (collection) {
     // create a new booking:
     router.post('/', (req, res) => {
         const newBooking = req.body;
-        console.log(newBooking);
+        // console.log(newBooking);
         collection
         .insertOne(newBooking)
         .then((result) => {

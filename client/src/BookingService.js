@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:9001/api/bookings';
+const baseURL = 'http://localhost:9001/api/bookings/';
 
 // fetch all the bookings:
 export const getBookings = () => {
@@ -24,4 +24,15 @@ export const deleteBooking = (id) => {
 };
 
 // update a booking:
-
+export const updateBooking = (booking) => {
+    return fetch(baseURL + booking._id, {
+        method: 'PUT',
+        body: JSON.stringify({
+            name: booking.name,
+            email: booking.email,
+            checkedIn: booking.checkedIn
+        }),
+        headers: { 'Content-Type': 'application/json'}
+    })
+    .then(res => res.json());
+};
